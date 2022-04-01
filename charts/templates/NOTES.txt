@@ -1,0 +1,11 @@
+1. Connaître l'IP du webserveur en exécutant la commande suivante :
+
+$ kubectl get service webserver
+
+2. Lancer un minikube tunnel pour y accèder depuis son navigateur :
+
+$ minikube tunnel
+
+3. Se connecter via : 
+
+http://IP

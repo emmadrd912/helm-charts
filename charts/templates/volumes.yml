@@ -1,0 +1,36 @@
+# Volumes PV et PVC
+
+{{- range $vol := .Values.volumes }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $vol.name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: {{ $vol.persistentVolumeReclaimPolicy }}
+  storageClassName: standard
+  capacity:
+    storage: {{ $vol.pv_size }}
+  hostPath:
+    path: {{ $vol.path }}
+
+---
+{{- end }}
+
+{{- range $vol := .Values.volumes }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ $vol.name }}
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeName: {{ $vol.volumeName }}
+  resources:
+    requests:
+      storage: {{ $vol.pvc_size }}
+
+---
+{{- end }}

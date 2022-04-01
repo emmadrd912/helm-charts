@@ -1,0 +1,134 @@
+# Default values for charts-tp4.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+  # image:
+  #   repository: codebuds/deno-webserver
+  #   pullPolicy: IfNotPresent
+  #   # Overrides the image tag whose default is the chart appVersion.
+  #   tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+volumes:
+  - mariadb:
+    name: maria-db
+    pv_size: 10Gi
+    path: /data/mariadb
+    persistentVolumeReclaimPolicy: Retain
+    pvc_size: 1Gi
+    volumeName: maria-db
+  - webserver:
+    name: webserver
+    pv_size: 10Gi
+    path: /data/webserver
+    persistentVolumeReclaimPolicy: Retain
+    pvc_size: 1Gi
+    volumeName: webserver
+
+webserver:
+  volumeMount:
+    name: webserver
+    mountPath: /srv/app/pvc
+  volumes:
+    name: webserver
+    claimName: webserver
+  service:
+    type: ClusterIP
+    port: 80
+    name: webserver
+  replicaCount: 1
+  image:
+    repository: codebuds/deno-webserver
+    pullPolicy: IfNotPresent
+    tag: 1.5.0
+
+mariadb:
+  rootPassword: asecret
+  user: root
+  password: asecret
+  database: logs
+  image:
+    repository: mariadb
+    pullPolicy: Always
+    tag: "10.7"
+  volumeMount:
+    name: maria-db
+    mountPath: /var/lib/mysql
+  volumes:
+    name: maria-db
+    claimName: maria-db
+  service:
+    name: maria-db
