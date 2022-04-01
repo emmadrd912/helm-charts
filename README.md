@@ -15,11 +15,11 @@ the latest versions of the packages.  You can then run `helm search repo
 
 To install the chart:
 
-    helm install my-webserver emmadrd912/charts-tp4
+    helm install charts-tp4 emmadrd912/charts-tp4
 
 To uninstall the chart:
 
-    helm delete my-webserver
+    helm delete charts-tp4
 
 ## Charts
 
