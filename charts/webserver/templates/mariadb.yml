@@ -13,8 +13,9 @@ spec:
   selector:
     matchLabels:
       app: maria-db
-  updatestrategy:
+  updateStrategy:
     type: RollingUpdate
+  serviceName: maria-db
   template:
     metadata:
       labels:
