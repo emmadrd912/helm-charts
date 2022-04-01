@@ -6,7 +6,7 @@ Helm's [documentation](https://helm.sh/docs) to get started.
 Once Helm has been set up correctly, add the repo as follows:
 
  ``
-helm repo add webserver https://emmadrd912.github.io/helm-charts
+helm repo add emmadrd912 https://emmadrd912.github.io/helm-charts
  ``
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
@@ -15,7 +15,7 @@ the latest versions of the packages.  You can then run `helm search repo
 
 To install the chart:
 
-    helm install my-webserver webserver/charts-tp4
+    helm install my-webserver emmadrd912/charts-tp4
 
 To uninstall the chart:
 
@@ -25,4 +25,6 @@ To uninstall the chart:
 
 **charts-tp4**
 
-* 0.1.0 : denowebser et mariadb déployé + choix des values.
+* 0.1.0 : 
+	* denowebserver et mariadb déployés.
+	* choix des values.
