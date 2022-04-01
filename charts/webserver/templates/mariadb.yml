@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "3"
@@ -8,16 +8,12 @@ metadata:
   name: maria-db
   namespace: default
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: maria-db
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+  updatestrategy:
     type: RollingUpdate
   template:
     metadata:

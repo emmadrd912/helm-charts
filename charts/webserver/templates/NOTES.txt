@@ -1,11 +1,9 @@
-1. Connaître l'IP du webserveur en exécutant la commande suivante :
+1. Connaître l'URL du serveur web en exécutant :
 
-$ kubectl get service webserver
+$ > kubectl get ingress
+NAME         CLASS   HOSTS             ADDRESS        PORTS   AGE
+charts-tp4   nginx   charts-tp4.local   192.168.49.2   80      5m4s
 
-2. Lancer un minikube tunnel pour y accèder depuis son navigateur :
+2. Puis se rendre sur :
 
-$ minikube tunnel
-
-3. Se connecter via : 
-
-http://IP
+http://charts-tp4.local
