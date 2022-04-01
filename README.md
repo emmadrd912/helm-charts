@@ -28,3 +28,7 @@ To uninstall the chart:
 * 0.1.0 : 
 	* denowebserver et mariadb déployés.
 	* choix des values.
+
+* 0.2.0 :
+	* ajout d'un ingress.
+	* mariadb en mode statefulset.
