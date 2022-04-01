@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  charts-tp4:
+  - apiVersion: v2
+    appVersion: 1.5.0
+    created: "2022-04-01T10:33:45.570952953Z"
+    description: A Helm chart for Kubernetes
+    digest: 069687158235e7224a7a05373d76d1796b919eb33dc866e8eec931df2f931f3e
+    name: charts-tp4
+    type: application
+    urls:
+    - https://github.com/emmadrd912/helm-charts/releases/download/charts-tp4-0.1.0/charts-tp4-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-01T10:33:45.570959053Z"
